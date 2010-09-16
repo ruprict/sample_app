@@ -15,22 +15,31 @@ class UsersController < ApplicationController
   end
   
   def new
-    @user = User.new
-    @title = "Sign up"
+    if !current_user.nil?
+      @user = User.new
+      @title = "Sign up"
+    else
+      redirect_to(root_path) 
+    end
   end
   
   def create
-    @user = User.new(params[:user])
-    if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+    
+    if !current_user.nil?
+      redirect_to(root_path) 
     else
-      @user.password=nil
-      @user.password_confirmation=nil
-      @title = "Sign up"
-      render 'new'
-     
+      @user = User.new(params[:user])
+      if @user.save
+        sign_in @user
+        flash[:success] = "Welcome to the Sample App!"
+        redirect_to @user
+      else
+        @user.password=nil
+        @user.password_confirmation=nil
+        @title = "Sign up"
+        render 'new'
+       
+      end
     end
   end
   
