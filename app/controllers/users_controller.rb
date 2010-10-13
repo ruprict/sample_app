@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
   
   def new
-    if !current_user.nil?
+    if current_user.nil?
       @user = User.new
       @title = "Sign up"
     else

@@ -116,12 +116,19 @@ describe User do
     end
     
     describe 'admin attribute' do
+     
       before(:each) do
+         @attr = {
+          :name=>"Example User", 
+          :email=>"admin@example.com",
+          :password => "foobar",
+          :password_confirmation => "foobar"        
+          }
         @user = User.create!(@attr)
       end
       
       it 'should respond to admin' do
-        @user.shoudl respond_to(:admin)
+        @user.should respond_to(:admin)
       end
       
       it 'should not be an admin by default' do

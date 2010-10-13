@@ -91,10 +91,7 @@ describe UsersController do
   
   describe "GET 'new'" do
     describe 'for non-signed-in users' do
-      before(:each) do
-        @user = Factory(:user)
-        test_sign_in(@user)
-      end
+      
        it "should be successful" do
         get 'new'
         response.should be_success
@@ -107,6 +104,10 @@ describe UsersController do
     end
     
     describe 'for signed-in users' do
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+      end
       it 'should redirect to root' do
         get :new
         response.should redirect_to(root_path)
