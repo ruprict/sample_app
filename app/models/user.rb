@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   
   before_save :encrypt_password
   
+  has_many :microposts, :dependent => :destroy
+  
   def has_password?(submitted_password)
     # Compare encrypted_password with the encrypted version of
     # submitted_password
