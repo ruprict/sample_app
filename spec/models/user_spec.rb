@@ -167,6 +167,26 @@ describe User do
       end
     end
     
+    describe 'status feed' do
+
+      it 'should have a feed' do
+        @user.should respond_to(:feed)
+      end
+      
+      it 'hsould include the users microposts' do
+        @user.feed.include?(@mp1).should be_true
+        @user.feed.include?(@mp2).should be_true
+      end
+      
+      it 'should not include a different users microposts' do
+        mp3 = Factory(:micropost, :user => Factory(:user, :email => Factory.next(:email)))
+        @user.feed.include?(@mp3).should be_false
+      end
+      
+    end
+    
+    
+    
   end
   
 end
