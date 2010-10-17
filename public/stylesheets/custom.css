@@ -215,3 +215,14 @@ form.new_micropost textarea {
     height: 4em;
     margin-bottom: 0;
 }
+#charCount{
+    float:right;
+    padding-right:45px;
+    color:#ccc;
+    font-size:small;
+    
+}
+.tooManyChars{
+    color:#f00 !important;
+    
+}
